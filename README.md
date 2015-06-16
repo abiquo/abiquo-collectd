@@ -7,20 +7,22 @@ This cookbook provides a recipe to install the Abiquo collectd plugin.
 It integrates any virtual machine deployed in the Abiquo platform with the
 metrics system and allows them to push their own metrics to the Abiquo API.
 
-# Requirements
+## Requirements
 
-* CentOS >= 6.5
-* Ubuntu >= 10.04
+The cookbook has been tested in the following platforms:
+
+* CentOS 6.5
+* Ubuntu 14.04
 
 This cookbook depends on the following cookbooks:
 
 * [collectd](https://github.com/coderanger/chef-collectd)
 
-# Recipes
+## Recipes
 
 TODO: Recipe list
 
-# Attributes
+## Attributes
 
 TODO: Attribute description
 
