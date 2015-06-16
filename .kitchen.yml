@@ -1,0 +1,14 @@
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: chef/centos-6.5
+  - name: chef/ubuntu-14.04
+
+suites:
+  - name: abiquo-collectd
+    run_list:
+      - recipe[abiquo-collectd::default]
