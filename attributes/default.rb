@@ -1,3 +1,6 @@
+# Cookbook Name:: abiquo-collectd
+# Attributes:: abiquo-collectd
+#
 # Copyright 2014, Abiquo
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,11 +15,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'chefspec'
-require 'chefspec/berkshelf'
-
-ChefSpec::Coverage.start!
-
-RSpec.configure do |config|
-    config.log_level = :error
+# Package to install
+case node['platform']
+when 'ubuntu'
+    default['abiquo_collectd']['package'] = 'collectd-core'
+when 'centos'
+    override['collectd']['conf_dir'] = '/etc'
+    default['abiquo_collectd']['package'] = 'collectd'
+else
+    default['abiquo_collectd']['package'] = 'collectd'
 end
+
+# Collectd plugin configuration
+default['abiquo_collectd']['log_traces'] = true
+default['abiquo_collectd']['interactive'] = true
+default['abiquo_collectd']['python_module_path'] = '/usr/lib/collectd'

@@ -14,21 +14,34 @@ The cookbook has been tested in the following platforms:
 * CentOS 6.5
 * Ubuntu 14.04
 
-This cookbook depends on the following cookbooks:
+The cookbook depends on the following cookbooks:
 
-* [collectd](https://github.com/coderanger/chef-collectd)
+* yum-epel
+* collectd-lib
 
 ## Recipes
 
-TODO: Recipe list
+* `recipe[abiquo-collectd]` - Installs colelctd and the Abiquo monitoring plugin
 
 ## Attributes
 
-TODO: Attribute description
+The following attributes are under the `node['abiquo_collectd']` namespace.
+
+Attribute | Description | Type | Mandatory | Default value
+----------|-------------|------|-----------|--------------
+`['endpoint']` | The endpoint where the plugin will push the metrics | String | Yes | nil
+`['app_key']` | The OAuth application key used to authenticate to the Abiquo API | String | Yes | nil
+`['app_secret']` | The OAuth application secret used to authenticate to the Abiquo API | String | Yes | nil
+`['access_token']` | The OAuth access token used to authenticate to the Abiquo API | String | Yes | nil
+`['access_token_secret']` | The OAuth access token secret used to authenticate to the Abiquo API | String | Yes | nil
+`['python_module_path']` | The path where python modules are installed | String | No | /usr/lib/collectd
+`['package']` | The name of the collectd package to install | String | No | collectd (collectd-core in Ubuntu)
 
 # Usage
 
-TODO: Usage
+The cookbook is pretty straightforward to use. Just set all the mandatory attributes with the values for
+the notification endpoint and the OAuth credentials, and include the `recipe[abiquo-collectd]` in the
+run list.
 
 # Testing
 

@@ -9,4 +9,5 @@ version          '0.1.0'
 supports 'centos'
 supports 'ubuntu'
 
-depends 'collectd'
+depends 'yum-epel', '~> 0.6.0'
+depends 'collectd-lib', '~> 3.0.1'
