@@ -1,7 +1,7 @@
 Abiquo collectd plugin
 ======================
 
-[![Build Status](https://travis-ci.org/abiquo/abiquo-collectd.svg?branch=master)](https://travis-ci.org/abiquo/abiquo-collectd)
+[![Build Status](https://travis-ci.org/abiquo/collectd-abiquo.svg?branch=master)](https://travis-ci.org/abiquo/collectd-abiquo)
 
 This cookbook provides a recipe to install the Abiquo collectd plugin.
 It integrates any virtual machine deployed in the Abiquo platform with the
@@ -16,16 +16,19 @@ The cookbook has been tested in the following platforms:
 
 The cookbook depends on the following cookbooks:
 
-* yum-epel
 * collectd-lib
+* python
+* yum-epel
 
 ## Recipes
 
-* `recipe[abiquo-collectd]` - Installs collectd and the Abiquo monitoring plugin
+* `recipe[collectd-abiquo]` - Installs collectd and the Abiquo monitoring plugin
+* `recipe[collectd-abiquo::collectd]` - Installs and configures collectd and the default plugins
+* `recipe[collectd-abiquo::plugin]` - Installs and configures the Abiquo collectd plugin
 
 ## Attributes
 
-The following attributes are under the `node['abiquo_collectd']` namespace.
+The following attributes are under the `node['collectd_abiquo']` namespace.
 
 Attribute | Description | Type | Mandatory | Default value
 ----------|-------------|------|-----------|--------------
@@ -35,12 +38,16 @@ Attribute | Description | Type | Mandatory | Default value
 `['access_token']` | The OAuth access token used to authenticate to the Abiquo API | String | Yes | nil
 `['access_token_secret']` | The OAuth access token secret used to authenticate to the Abiquo API | String | Yes | nil
 `['python_module_path']` | The path where python modules are installed | String | No | /usr/lib/collectd
-`['package']` | The name of the collectd package to install | String | No | collectd (collectd-core in Ubuntu)
+`['packages']` | The names of the collectd packages to install | List | No | ['collectd'] (['collectd-core', 'libpython2.7'] in Ubuntu)
+`['plugins']` | The names of the default collectd plugins to install | List | No | ['cpu', 'disk', 'interface']
+`['log_traces']` | Enables the Abiquo plugin log | Boolean | No | true
+`['version']` | The version of the Abiquo plugin to install | String | No | master
+`['log_traces']` | The URL of the Abiquo plugin file | String | Yes | https://cdn.rawgit.com/abiquo/collectd-abiquo-cookbook/master/files/default/abiquo.py 
 
 # Usage
 
 The cookbook is pretty straightforward to use. Just set all the mandatory attributes with the values for
-the notification endpoint and the OAuth credentials, and include the `recipe[abiquo-collectd]` in the
+the notification endpoint and the OAuth credentials, and include the `recipe[collectd-abiquo]` in the
 run list.
 
 # Testing

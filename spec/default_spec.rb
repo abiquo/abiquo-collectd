@@ -14,80 +14,19 @@
 
 require 'spec_helper'
 
-describe 'abiquo-collectd::default' do
+describe 'collectd-abiquo::default' do
     let(:chef_run) do
         ChefSpec::SoloRunner.new do |node|
-            node.set['abiquo_collectd']['endpoint'] = 'http://localhost'
-            node.set['abiquo_collectd']['app_key'] = 'app-key'
-            node.set['abiquo_collectd']['app_secret'] = 'app-secret'
-            node.set['abiquo_collectd']['access_token'] = 'access-token'
-            node.set['abiquo_collectd']['access_token_secret'] = 'access-token-secret'
-        end
+            node.set['collectd_abiquo']['endpoint'] = 'http://localhost'
+            node.set['collectd_abiquo']['app_key'] = 'app-key'
+            node.set['collectd_abiquo']['app_secret'] = 'app-secret'
+            node.set['collectd_abiquo']['access_token'] = 'access-token'
+            node.set['collectd_abiquo']['access_token_secret'] = 'access-token-secret'
+        end.converge(described_recipe)
     end
 
-    it 'uses the right Ubuntu package' do
-        chef_run.node.automatic['platform'] = 'ubuntu'
-        chef_run.converge(described_recipe)
-
-        expect(chef_run.node['abiquo_collectd']['package']).to eq('collectd-core')
-        expect(chef_run.node['collectd']['packages']).to eq(['collectd-core'])
-    end
-
-    it 'uses the right CentOS package and config' do
-        chef_run.node.automatic['platform'] = 'centos'
-        chef_run.converge(described_recipe)
-
-        expect(chef_run.node['abiquo_collectd']['package']).to eq('collectd')
-        expect(chef_run.node['collectd']['packages']).to eq(['collectd'])
-        expect(chef_run.node['collectd']['conf_dir']).to eq('/etc')
-    end
-
-    it 'uses the right default package' do
-        chef_run.node.automatic['platform'] = 'suse'
-        chef_run.converge(described_recipe)
-
-        expect(chef_run.node['abiquo_collectd']['package']).to eq('collectd')
-        expect(chef_run.node['collectd']['packages']).to eq(['collectd'])
-    end
-
-    it 'installs and configures collectd' do
-        chef_run.converge(described_recipe)
-        expect(chef_run).to include_recipe('collectd-lib::packages')
-        expect(chef_run).to include_recipe('collectd-lib::directories')
-        expect(chef_run).to include_recipe('collectd-lib::config')
-        expect(chef_run).to include_recipe('collectd-lib::service')
-    end
-
-    it 'installs the python dependencies' do
-        chef_run.converge(described_recipe)
-        expect(chef_run).to include_recipe('python::pip')
-        expect(chef_run).to install_python_pip('requests').with(:version => '2.5.0')
-        expect(chef_run).to install_python_pip('requests-oauthlib').with(:version => '0.4.2')
-    end
-
-    it 'uploads the Abiquo plugin script' do
-        chef_run.converge(described_recipe)
-        expect(chef_run).to create_cookbook_file('abiquo.py').with(
-            :path => '/usr/lib/collectd/abiquo.py'
-        )
-    end
-
-    it 'configures the Abiquo collectd plugin' do
-        chef_run.converge(described_recipe)
-        expect(chef_run).to create_collectd_conf('collectd-abiquo').with({
-            :plugin => { 'python' => { 'Globals' => true } },
-            :conf => { 'ModulePath' => '/usr/lib/collectd',
-                'LogTraces' => true,
-                'Interactive' => true,
-                'Import' => 'collectd-abiquo',
-                %w(Module collectd-abiquo) => {
-                    'URL' => 'http://localhost',
-                    'AppKey' => 'app-key',
-                    'AppSecret' => 'app-secret',
-                    'AccessToken' => 'access-token',
-                    'AccessTokenSecret' => 'access-token-secret'
-                }
-            }
-        })
+    it 'includes the collectd and abiquo recipes' do
+        expect(chef_run).to include_recipe('collectd-abiquo::collectd')
+        expect(chef_run).to include_recipe('collectd-abiquo::plugin')
     end
 end

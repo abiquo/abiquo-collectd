@@ -1,4 +1,4 @@
-name             'abiquo-collectd'
+name             'collectd-abiquo'
 maintainer       'Abiquo'
 maintainer_email 'ignasi.barrera@abiquo.com'
 license          'Apache 2.0'

@@ -1,5 +1,5 @@
-# Cookbook Name:: abiquo-collectd
-# Attributes:: abiquo-collectd
+# Cookbook Name:: collectd-abiquo
+# Attributes:: collectd-abiquo
 #
 # Copyright 2014, Abiquo
 #
@@ -18,15 +18,20 @@
 # Package to install
 case node['platform']
 when 'ubuntu'
-    default['abiquo_collectd']['package'] = 'collectd-core'
+    default['collectd_abiquo']['packages'] = ['collectd-core', 'libpython2.7']
 when 'centos'
     override['collectd']['conf_dir'] = '/etc'
-    default['abiquo_collectd']['package'] = 'collectd'
+    override['collectd']['plugin_dir'] = '/usr/lib64/collectd'
+    default['collectd_abiquo']['packages'] = ['collectd']
 else
-    default['abiquo_collectd']['package'] = 'collectd'
+    default['collectd_abiquo']['packages'] = ['collectd']
 end
 
-# Collectd plugin configuration
-default['abiquo_collectd']['log_traces'] = true
-default['abiquo_collectd']['interactive'] = true
-default['abiquo_collectd']['python_module_path'] = '/usr/lib/collectd'
+# Default plugin configuration
+default['collectd_abiquo']['version'] = 'master'
+default['collectd_abiquo']['url'] = "https://cdn.rawgit.com/abiquo/collectd-abiquo-cookbook/#{node['collectd_abiquo']['version']}/files/default/abiquo.py"
+default['collectd_abiquo']['plugins'] = ['cpu', 'disk', 'interface']
+default['collectd_abiquo']['log_traces'] = true
+
+# Fix typo in the collectd-lib cookbook
+override['collectd']['extra_conf_dir'] = '/etc/collectd/collectd.conf.d'

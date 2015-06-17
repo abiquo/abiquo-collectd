@@ -9,13 +9,13 @@ platforms:
   - name: chef/ubuntu-14.04
 
 suites:
-  - name: abiquo-collectd
+  - name: collectd-abiquo
     run_list:
-      - recipe[abiquo-collectd]
+      - recipe[collectd-abiquo]
     attributes:
-      abiquo_collectd:
+      collectd_abiquo:
         endpoint: http://localhost
-        app_key: app-key
-        app_secret: app-secret
+        app_key: api-key
+        app_secret: api-secret
         access_token: access-token
         access_token_secret: access-token-secret

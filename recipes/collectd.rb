@@ -1,5 +1,5 @@
 # Cookbook Name:: collectd-abiquo
-# Recipe:: default
+# Recipe:: collectd
 #
 # Copyright 2014, Abiquo
 #
@@ -15,5 +15,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include_recipe 'collectd-abiquo::collectd'
-include_recipe 'collectd-abiquo::plugin'
+# Use the right package for each platform
+node.set['collectd']['packages'] = node['collectd_abiquo']['packages']
+
+if node['platform'] == 'centos'
+    # The collectd package is only in the EPEl repo
+    include_recipe 'yum-epel'
+end
+
+include_recipe 'collectd-lib::packages'
+include_recipe 'collectd-lib::directories'
+include_recipe 'collectd-lib::config'
+include_recipe 'collectd-lib::service'
+
+node['collectd_abiquo']['plugins'].each do |name|
+    collectd_conf name do
+        plugin name
+    end
+end
