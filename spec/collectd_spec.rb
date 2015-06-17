@@ -27,11 +27,13 @@ describe 'collectd-abiquo::collectd' do
 
     it 'uses the right CentOS package and config' do
         chef_run.node.automatic['platform'] = 'centos'
+        chef_run.node.automatic['kernel']['machine'] = 'x86_64'
         chef_run.converge(described_recipe)
 
         expect(chef_run.node['collectd_abiquo']['packages']).to eq(['collectd'])
         expect(chef_run.node['collectd']['packages']).to eq(['collectd'])
         expect(chef_run.node['collectd']['conf_dir']).to eq('/etc')
+        expect(chef_run.node['collectd']['plugin_dir']).to eq('/usr/lib64/collectd')
     end
 
     it 'uses the right default package' do
