@@ -20,16 +20,18 @@ case node['platform']
 when 'ubuntu'
     default['collectd_abiquo']['packages'] = ['collectd-core', 'libpython2.7']
 when 'centos'
-    override['collectd']['conf_dir'] = '/etc'
-    override['collectd']['plugin_dir'] = '/usr/lib64/collectd'
     default['collectd_abiquo']['packages'] = ['collectd']
+    override['collectd']['conf_dir'] = '/etc'
+    if node['kernel']['machine'] == 'x86_64'
+        override['collectd']['plugin_dir'] = '/usr/lib64/collectd'
+    end
 else
     default['collectd_abiquo']['packages'] = ['collectd']
 end
 
 # Default plugin configuration
 default['collectd_abiquo']['version'] = 'master'
-default['collectd_abiquo']['url'] = "https://cdn.rawgit.com/abiquo/collectd-abiquo-cookbook/#{node['collectd_abiquo']['version']}/files/default/abiquo.py"
+default['collectd_abiquo']['url'] = "https://rawgit.com/abiquo/collectd-abiquo-cookbook/#{node['collectd_abiquo']['version']}/files/default/abiquo.py"
 default['collectd_abiquo']['plugins'] = ['cpu', 'disk', 'interface']
 default['collectd_abiquo']['log_traces'] = true
 
