@@ -1,7 +1,7 @@
 Abiquo collectd plugin
 ======================
 
-[![Build Status](https://travis-ci.org/abiquo/collectd-abiquo.svg?branch=master)](https://travis-ci.org/abiquo/collectd-abiquo)
+[![Build Status](https://travis-ci.org/abiquo/collectd-abiquo-cookbook.svg?branch=master)](https://travis-ci.org/abiquo/collectd-abiquo-cookbook)
 
 This cookbook provides a recipe to install the Abiquo collectd plugin.
 It integrates any virtual machine deployed in the Abiquo platform with the
