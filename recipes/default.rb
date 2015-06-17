@@ -28,6 +28,17 @@ include_recipe 'collectd-lib::directories'
 include_recipe 'collectd-lib::config'
 include_recipe 'collectd-lib::service'
 
+# Abiquo plugin dependencies
+include_recipe 'python::pip'
+
+python_pip 'requests' do
+    version '2.5.0'
+end
+
+python_pip 'requests-oauthlib' do
+    version '0.4.2'
+end
+
 cookbook_file "abiquo.py" do
     path "#{node['collectd']['plugin_dir']}/abiquo.py"
     action :create

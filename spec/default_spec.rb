@@ -58,6 +58,13 @@ describe 'abiquo-collectd::default' do
         expect(chef_run).to include_recipe('collectd-lib::service')
     end
 
+    it 'installs the python dependencies' do
+        chef_run.converge(described_recipe)
+        expect(chef_run).to include_recipe('python::pip')
+        expect(chef_run).to install_python_pip('requests').with(:version => '2.5.0')
+        expect(chef_run).to install_python_pip('requests-oauthlib').with(:version => '0.4.2')
+    end
+
     it 'uploads the Abiquo plugin script' do
         chef_run.converge(described_recipe)
         expect(chef_run).to create_cookbook_file('abiquo.py').with(
