@@ -18,18 +18,16 @@
 # Use the right package for each platform
 node.set['collectd']['packages'] = [node['abiquo_collectd']['package']]
 
-# In CentOS the EPEL repository must be enabled
 if node['platform'] == 'centos'
+    # The collectd package is only in the EPEl repo
     include_recipe 'yum-epel'
 end
 
-# Install and configure collectd
 include_recipe 'collectd-lib::packages'
 include_recipe 'collectd-lib::directories'
 include_recipe 'collectd-lib::config'
 include_recipe 'collectd-lib::service'
 
-# Upload the Abiquo plugin file
 cookbook_file "abiquo.py" do
     path "#{node['collectd']['plugin_dir']}/abiquo.py"
     action :create

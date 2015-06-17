@@ -11,7 +11,7 @@ platforms:
 suites:
   - name: abiquo-collectd
     run_list:
-      - recipe[abiquo-collectd::default]
+      - recipe[abiquo-collectd]
     attributes:
       abiquo_collectd:
         endpoint: http://localhost

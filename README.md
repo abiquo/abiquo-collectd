@@ -21,7 +21,7 @@ The cookbook depends on the following cookbooks:
 
 ## Recipes
 
-* `recipe[abiquo-collectd]` - Installs colelctd and the Abiquo monitoring plugin
+* `recipe[abiquo-collectd]` - Installs collectd and the Abiquo monitoring plugin
 
 ## Attributes
 
