@@ -25,18 +25,18 @@ python_pip 'requests-oauthlib' do
     version '0.4.2'
 end
 
-remote_file "#{node['collectd']['plugin_dir']}/abiquo.py" do
+remote_file "#{node['collectd']['plugin_dir']}/abiquo-writer.py" do
     source node['collectd_abiquo']['url']
 end
 
-collectd_conf 'abiquo' do
+collectd_conf 'abiquo-writer' do
     priority 15
     plugin 'python' => { 'Globals' => true }
     conf 'ModulePath' => node['collectd']['plugin_dir'],
         'LogTraces' => node['collectd_abiquo']['log_traces'],
         'Interactive' => false,
-        'Import' => 'abiquo',
-        %w(Module abiquo) => {
+        'Import' => 'abiquo-writer',
+        %w(Module abiquo-writer) => {
             'Authentication' => 'oauth',
             'URL' => node['collectd_abiquo']['endpoint'],
             'ApplicationKey' => node['collectd_abiquo']['app_key'],

@@ -1,5 +1,5 @@
-Abiquo collectd plugin
-======================
+Chef cookbook for the abiquo-writer collectd plugin
+===================================================
 
 [![Build Status](https://travis-ci.org/abiquo/collectd-abiquo-cookbook.svg?branch=master)](https://travis-ci.org/abiquo/collectd-abiquo-cookbook)
 

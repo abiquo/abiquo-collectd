@@ -35,20 +35,20 @@ describe 'collectd-abiquo::plugin' do
 
     it 'uploads the Abiquo plugin script' do
         chef_run.converge(described_recipe)
-        expect(chef_run).to create_remote_file('/usr/lib/collectd/abiquo.py').with(
-            :source => 'https://rawgit.com/abiquo/collectd-abiquo-cookbook/master/files/default/abiquo.py'
+        expect(chef_run).to create_remote_file('/usr/lib/collectd/abiquo-writer.py').with(
+            :source => 'https://rawgit.com/abiquo/collectd-abiquo/master/abiquo-writer.py'
         )
     end
 
     it 'configures the Abiquo collectd plugin' do
         chef_run.converge(described_recipe)
-        expect(chef_run).to create_collectd_conf('abiquo').with({
+        expect(chef_run).to create_collectd_conf('abiquo-writer').with({
             :plugin => { 'python' => { 'Globals' => true } },
             :conf => { 'ModulePath' => '/usr/lib/collectd',
                 'LogTraces' => true,
                 'Interactive' => false,
-                'Import' => 'abiquo',
-                %w(Module abiquo) => {
+                'Import' => 'abiquo-writer',
+                %w(Module abiquo-writer) => {
                     'Authentication' => 'oauth',
                     'URL' => 'http://localhost',
                     'ApplicationKey' => 'app-key',

@@ -31,7 +31,7 @@ end
 
 # Default plugin configuration
 default['collectd_abiquo']['version'] = 'master'
-default['collectd_abiquo']['url'] = "https://rawgit.com/abiquo/collectd-abiquo-cookbook/#{node['collectd_abiquo']['version']}/files/default/abiquo.py"
+default['collectd_abiquo']['url'] = "https://rawgit.com/abiquo/collectd-abiquo/#{node['collectd_abiquo']['version']}/abiquo-writer.py"
 default['collectd_abiquo']['plugins'] = ['cpu', 'disk', 'interface']
 default['collectd_abiquo']['log_traces'] = true
 
