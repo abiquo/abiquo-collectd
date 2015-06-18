@@ -32,7 +32,7 @@ end
 # Default plugin configuration
 default['collectd_abiquo']['version'] = 'master'
 default['collectd_abiquo']['url'] = "https://rawgit.com/abiquo/collectd-abiquo/#{node['collectd_abiquo']['version']}/abiquo-writer.py"
-default['collectd_abiquo']['plugins'] = ['cpu', 'disk', 'interface']
+default['collectd_abiquo']['plugins'] = ['cpu', 'memory', 'disk', 'interface']
 default['collectd_abiquo']['log_traces'] = true
 
 # Fix typo in the collectd-lib cookbook
