@@ -33,16 +33,21 @@ The following attributes are under the `node['collectd_abiquo']` namespace.
 Attribute | Description | Type | Mandatory | Default value
 ----------|-------------|------|-----------|--------------
 `['endpoint']` | The endpoint where the plugin will push the metrics | String | Yes | nil
-`['app_key']` | The OAuth application key used to authenticate to the Abiquo API | String | Yes | nil
-`['app_secret']` | The OAuth application secret used to authenticate to the Abiquo API | String | Yes | nil
-`['access_token']` | The OAuth access token used to authenticate to the Abiquo API | String | Yes | nil
-`['access_token_secret']` | The OAuth access token secret used to authenticate to the Abiquo API | String | Yes | nil
+`['auth_type']` | The authentication method used to push metrics to the Abiquo API (basic | oauth) | String | No | 'oauth'
+`['username']` | The username used to authenticate to the Abiquo API | String | When using basic auth | nil
+`['password']` | The password used to authenticate to the Abiquo API | String | When using basic auth | nil
+`['app_key']` | The OAuth application key used to authenticate to the Abiquo API | String | When using OAuth | nil
+`['app_secret']` | The OAuth application secret used to authenticate to the Abiquo API | String | When using OAuth | nil
+`['access_token']` | The OAuth access token used to authenticate to the Abiquo API | String | When using OAuth | nil
+`['access_token_secret']` | The OAuth access token secret used to authenticate to the Abiquo API | String | When using OAuth | nil
 `['python_module_path']` | The path where python modules are installed | String | No | /usr/lib/collectd
-`['packages']` | The names of the collectd packages to install | List | No | ['collectd'] (['collectd-core', 'libpython2.7'] in Ubuntu)
-`['plugins']` | The names of the default collectd plugins to install | List | No | ['cpu', 'disk', 'interface']
+`['packages']` | The names of the collectd packages to install | List | No | \['collectd'\] (\['collectd-core', 'libpython2.7'\] in Ubuntu)
+`['plugins']` | The names of the default collectd plugins to install | List | No | \['cpu', 'disk', 'interface'\]
 `['log_traces']` | Enables the Abiquo plugin log | Boolean | No | true
 `['version']` | The version of the Abiquo plugin to install | String | No | master
-`['log_traces']` | The URL of the Abiquo plugin file | String | Yes | https://cdn.rawgit.com/abiquo/collectd-abiquo-cookbook/master/files/default/abiquo.py 
+`['url']` | The URL of the Abiquo plugin file | String | Yes | https://rawgit.com/abiquo/collectd-abiquo/master/abiquo-writer.py 
+`['verify_ssl']` | Enable SSL validation when pushing the metrics | Boolean | No | false
+`['flush_interval_secs']` | Interval in which the metrics are pushed, in seconds | Integer | No | 30
 
 # Usage
 

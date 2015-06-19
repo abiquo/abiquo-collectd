@@ -34,6 +34,9 @@ default['collectd_abiquo']['version'] = 'master'
 default['collectd_abiquo']['url'] = "https://rawgit.com/abiquo/collectd-abiquo/#{node['collectd_abiquo']['version']}/abiquo-writer.py"
 default['collectd_abiquo']['plugins'] = ['cpu', 'memory', 'disk', 'interface']
 default['collectd_abiquo']['log_traces'] = true
+default['collectd_abiquo']['auth_type'] = 'oauth'
+default['collectd_abiquo']['verify_ssl'] = false
+default['collectd_abiquo']['flush_interval_secs'] = 30
 
 # Fix typo in the collectd-lib cookbook
 override['collectd']['extra_conf_dir'] = '/etc/collectd/collectd.conf.d'

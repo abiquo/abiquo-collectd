@@ -19,6 +19,8 @@ describe 'collectd-abiquo::plugin' do
         ChefSpec::SoloRunner.new do |node|
             node.automatic['platform'] = 'ubuntu'
             node.set['collectd_abiquo']['endpoint'] = 'http://localhost'
+            node.set['collectd_abiquo']['username'] = 'user'
+            node.set['collectd_abiquo']['password'] = 'pass'
             node.set['collectd_abiquo']['app_key'] = 'app-key'
             node.set['collectd_abiquo']['app_secret'] = 'app-secret'
             node.set['collectd_abiquo']['access_token'] = 'access-token'
@@ -40,7 +42,7 @@ describe 'collectd-abiquo::plugin' do
         )
     end
 
-    it 'configures the Abiquo collectd plugin' do
+    it 'configures the Abiquo collectd plugin with OAuth' do
         chef_run.converge(described_recipe)
         expect(chef_run).to create_collectd_conf('abiquo-writer').with({
             :plugin => { 'python' => { 'Globals' => true } },
@@ -51,10 +53,33 @@ describe 'collectd-abiquo::plugin' do
                 %w(Module abiquo-writer) => {
                     'Authentication' => 'oauth',
                     'URL' => 'http://localhost',
+                    'VerifySSL' => false,
+                    'FlushIntervalSecs' => 30,
                     'ApplicationKey' => 'app-key',
                     'ApplicationSecret' => 'app-secret',
                     'AccessToken' => 'access-token',
                     'AccessTokenSecret' => 'access-token-secret'
+                }
+            }
+        })
+    end
+
+    it 'configures the Abiquo collectd plugin with basic auth' do
+        chef_run.node.set['collectd_abiquo']['auth_type'] = 'basic'
+        chef_run.converge(described_recipe)
+        expect(chef_run).to create_collectd_conf('abiquo-writer').with({
+            :plugin => { 'python' => { 'Globals' => true } },
+            :conf => { 'ModulePath' => '/usr/lib/collectd',
+                'LogTraces' => true,
+                'Interactive' => false,
+                'Import' => 'abiquo-writer',
+                %w(Module abiquo-writer) => {
+                    'Authentication' => 'basic',
+                    'URL' => 'http://localhost',
+                    'VerifySSL' => false,
+                    'FlushIntervalSecs' => 30,
+                    'Username' => 'user',
+                    'Password' => 'pass'
                 }
             }
         })
