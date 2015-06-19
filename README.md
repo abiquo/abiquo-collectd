@@ -3,7 +3,7 @@ Chef cookbook for the abiquo-writer collectd plugin
 
 [![Build Status](https://travis-ci.org/abiquo/collectd-abiquo-cookbook.svg?branch=master)](https://travis-ci.org/abiquo/collectd-abiquo-cookbook)
 
-This cookbook provides a recipe to install the Abiquo collectd plugin.
+This cookbook provides a recipe to install the [Abiquo collectd plugin](https://github.com/abiquo/collectd-abiquo).
 It integrates any virtual machine deployed in the Abiquo platform with the
 metrics system and allows them to push their own metrics to the Abiquo API.
 
