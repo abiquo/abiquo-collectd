@@ -32,9 +32,13 @@ end
 abiquo_writer_config = {
     'Authentication' => node['collectd_abiquo']['auth_type'],
     'URL' => node['collectd_abiquo']['endpoint'],
-    'VerifySSL' => node['collectd_abiquo']['verify_ssl'],
     'FlushIntervalSecs' => node['collectd_abiquo']['flush_interval_secs']
 }
+
+# The verify ssl must only be present when true
+if node['collectd_abiquo']['verify_ssl']
+    abiquo_writer_config['VerifySSL'] = node['collectd_abiquo']['verify_ssl']
+end
 
 case node['collectd_abiquo']['auth_type']
 when 'oauth'

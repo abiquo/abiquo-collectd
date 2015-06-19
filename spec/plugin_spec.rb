@@ -53,7 +53,6 @@ describe 'collectd-abiquo::plugin' do
                 %w(Module abiquo-writer) => {
                     'Authentication' => 'oauth',
                     'URL' => 'http://localhost',
-                    'VerifySSL' => false,
                     'FlushIntervalSecs' => 30,
                     'ApplicationKey' => 'app-key',
                     'ApplicationSecret' => 'app-secret',
@@ -76,7 +75,28 @@ describe 'collectd-abiquo::plugin' do
                 %w(Module abiquo-writer) => {
                     'Authentication' => 'basic',
                     'URL' => 'http://localhost',
-                    'VerifySSL' => false,
+                    'FlushIntervalSecs' => 30,
+                    'Username' => 'user',
+                    'Password' => 'pass'
+                }
+            }
+        })
+    end
+
+    it 'configures the Abiquo collectd plugin with SSL verification' do
+        chef_run.node.set['collectd_abiquo']['auth_type'] = 'basic'
+        chef_run.node.set['collectd_abiquo']['verify_ssl'] = true
+        chef_run.converge(described_recipe)
+        expect(chef_run).to create_collectd_conf('abiquo-writer').with({
+            :plugin => { 'python' => { 'Globals' => true } },
+            :conf => { 'ModulePath' => '/usr/lib/collectd',
+                'LogTraces' => true,
+                'Interactive' => false,
+                'Import' => 'abiquo-writer',
+                %w(Module abiquo-writer) => {
+                    'Authentication' => 'basic',
+                    'URL' => 'http://localhost',
+                    'VerifySSL' => true,
                     'FlushIntervalSecs' => 30,
                     'Username' => 'user',
                     'Password' => 'pass'
