@@ -30,7 +30,7 @@ else
 end
 
 # Default plugin configuration
-default['collectd_abiquo']['version'] = 'master'
+default['collectd_abiquo']['version'] = '0.0.1'
 default['collectd_abiquo']['url'] = "https://rawgit.com/abiquo/collectd-abiquo/#{node['collectd_abiquo']['version']}/abiquo-writer.py"
 default['collectd_abiquo']['plugins'] = ['cpu', 'memory', 'disk', 'interface']
 default['collectd_abiquo']['log_traces'] = true

@@ -2,6 +2,8 @@ Chef cookbook for the abiquo-writer collectd plugin
 ===================================================
 
 [![Build Status](https://travis-ci.org/abiquo/collectd-abiquo-cookbook.svg?branch=master)](https://travis-ci.org/abiquo/collectd-abiquo-cookbook)
+[![collectd-abiquo Cookbook](https://img.shields.io/badge/collectd--abiquo--cookbook-v0.1.0-blue.svg?style=flat)](https://supermarket.chef.io/cookbooks/collectd-abiquo)
+[![Chef Version](http://img.shields.io/badge/chef-v12.4.1-orange.svg?style=flat)](https://www.chef.io)
 
 This cookbook provides a recipe to install the [Abiquo collectd plugin](https://github.com/abiquo/collectd-abiquo).
 It integrates any virtual machine deployed in the Abiquo platform with the
