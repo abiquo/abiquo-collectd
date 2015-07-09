@@ -38,7 +38,7 @@ describe 'collectd-abiquo::plugin' do
     it 'uploads the Abiquo plugin script' do
         chef_run.converge(described_recipe)
         expect(chef_run).to create_remote_file('/usr/lib/collectd/abiquo-writer.py').with(
-            :source => 'https://rawgit.com/abiquo/collectd-abiquo/master/abiquo-writer.py'
+            :source => 'https://rawgit.com/abiquo/collectd-abiquo/0.0.1/abiquo-writer.py'
         )
     end
 
