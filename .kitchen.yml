@@ -5,6 +5,9 @@ provisioner:
   name: chef_zero
   require_chef_omnibus: true
 
+transport:
+  compression: none
+
 platforms:
   - name: chef/centos-6.5
   - name: chef/ubuntu-14.04
