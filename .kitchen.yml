@@ -3,6 +3,7 @@ driver:
 
 provisioner:
   name: chef_zero
+  require_chef_omnibus: true
 
 platforms:
   - name: chef/centos-6.5
