@@ -3,7 +3,7 @@ Chef cookbook for the abiquo-writer collectd plugin
 
 [![Build Status](https://travis-ci.org/abiquo/collectd-abiquo-cookbook.svg?branch=master)](https://travis-ci.org/abiquo/collectd-abiquo-cookbook)
 [![collectd-abiquo Cookbook](https://img.shields.io/badge/collectd--abiquo--cookbook-v0.2.0-blue.svg?style=flat)](https://supermarket.chef.io/cookbooks/collectd-abiquo)
-[![Chef Version](http://img.shields.io/badge/chef-v12.4.1-orange.svg?style=flat)](https://www.chef.io)
+[![Chef Version](http://img.shields.io/badge/chef-v12.5.1-orange.svg?style=flat)](https://www.chef.io)
 
 This cookbook provides a recipe to install the [Abiquo collectd plugin](https://github.com/abiquo/collectd-abiquo).
 It integrates any virtual machine deployed in the Abiquo platform with the
@@ -14,7 +14,7 @@ metrics system and allows them to push their own metrics to the Abiquo API.
 The cookbook has been tested in the following platforms:
 
 * CentOS 6.5
-* Ubuntu 14.04
+* Ubuntu 16.04
 
 The cookbook depends on the following cookbooks:
 
@@ -66,6 +66,9 @@ Once installed you can run the unit and integration tests as follows:
     bundle exec berks install   # Install the cookbook dependencies
     bundle exec rake            # Run the unit and style tests
     bundle exec rake kitchen    # Run the integration tests
+
+The tests and Gemfile have been developed using Ruby 2.1.5, and that is the recommended Ruby version to use to run the tests.
+Other versions may cause conflicts with the versions of the gems Bundler will install.
 
 # License and authors
 
