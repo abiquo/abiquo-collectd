@@ -13,7 +13,8 @@ metrics system and allows them to push their own metrics to the Abiquo API.
 
 The cookbook has been tested in the following platforms:
 
-* CentOS 6.5
+* CentOS 6.7
+* CentOS 7.2
 * Ubuntu 16.04
 
 The cookbook depends on the following cookbooks:
