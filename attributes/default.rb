@@ -37,6 +37,7 @@ default['collectd_abiquo']['log_traces'] = true
 default['collectd_abiquo']['auth_type'] = 'oauth'
 default['collectd_abiquo']['verify_ssl'] = false
 default['collectd_abiquo']['flush_interval_secs'] = 30
+default['collectd_abiquo']['credentials_data_bag'] = 'abiquo_credentials'
 
 # Fix typo in the collectd-lib cookbook
 override['collectd']['extra_conf_dir'] = '/etc/collectd/collectd.conf.d'

@@ -54,10 +54,11 @@ run list. You'll have to configure a data bag with the credentials in the Chef S
 # Configuring access to the Abiquo API
 
 In order to let the collectd plugin push metrics to the Abiquo API, the credentials must be stored in a
-data bag called `abiquo_credentials`, inside an item named `collectd_basic` (for basic auth credentials) or
-`collectd_oauth` (for OAuth credentials). The recipes will pick the right data bag item according to the value
-of the `node['collectd_abiquo']['auth_type']` attribute. Convenience items are included in this cookbook. You
-can upload them to the Chef Server as follows:
+data bag with an item named `collectd_basic` (for basic auth credentials) or `collectd_oauth` (for OAuth
+credentials). The recipes will pick the right data bag item according to the value of the `node['collectd_abiquo']['auth_type']`
+attribute. The name of the data bag can be configured with the `node['collectd_abiquo']['credentials_data_bag']`
+8defaults to `abiquo_credentials`). Convenience items are included in this cookbook. You can upload them to the
+Chef Server as follows:
 
     knife data bag create abiquo_credentials
     knife data bag from file abiquo_credentials data_bags/abiquo_credentials/collectd_basic.json

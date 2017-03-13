@@ -26,7 +26,7 @@ module AbiquoCollectd
                 abiquo_writer_config['VerifySSL'] = node['collectd_abiquo']['verify_ssl']
             end
 
-            credentials = data_bag_item('abiquo_credentials', "collectd_#{node['collectd_abiquo']['auth_type']}")
+            credentials = data_bag_item(node['collectd_abiquo']['credentials_data_bag'], "collectd_#{node['collectd_abiquo']['auth_type']}")
 
             case node['collectd_abiquo']['auth_type']
             when 'oauth'
