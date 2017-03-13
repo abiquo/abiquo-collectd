@@ -6,7 +6,7 @@ description      'Installs and configures the Abiquo collectd plugin'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 source_url       'https://github.com/abiquo/collectd-abiquo-cookbook'
 issues_url       'https://github.com/abiquo/collectd-abiquo-cookbook/issues'
-version          '0.2.0'
+version          '0.2.1'
 
 recipe 'collectd-abiquo', 'Installs collectd and the Abiquo monitoring plugin'
 recipe 'collectd-abiquo::collectd', 'Installs and configures collectd and the default plugins'
