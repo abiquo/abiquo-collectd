@@ -8,9 +8,9 @@ source_url       'https://github.com/abiquo/collectd-abiquo-cookbook'
 issues_url       'https://github.com/abiquo/collectd-abiquo-cookbook/issues'
 version          '0.2.0'
 
-supports 'centos'
-supports 'ubuntu'
+supports 'centos', '~> 6.7'
+supports 'ubuntu', '~> 16.04'
 
-depends 'collectd-lib', '~> 3.0.1'
+depends 'collectd-lib', '~> 3.1.0'
 depends 'python', '~> 1.4.6'
-depends 'yum-epel', '~> 0.6.0'
+depends 'yum-epel', '~> 2.1.1'

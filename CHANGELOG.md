@@ -3,6 +3,8 @@ collectd-abiquo CHANGELOG
 
 # 0.2.0
 
+* Credentials are stored in a data bag.
+
 # 0.1.0
 
 * Use OAuth to authenticate to the Abiquo API.

@@ -19,7 +19,7 @@
 node.set['collectd']['packages'] = node['collectd_abiquo']['packages']
 
 if node['platform'] == 'centos'
-    # The collectd package is only in the EPEl repo
+    # The collectd package is only in the EPEL repo
     include_recipe 'yum-epel'
 end
 

@@ -15,7 +15,7 @@
 require 'spec_helper'
 
 describe 'collectd-abiquo::collectd' do
-    let(:chef_run) { ChefSpec::SoloRunner.new }
+    let(:chef_run) { ChefSpec::ServerRunner.new }
 
     it 'uses the right Ubuntu package' do
         chef_run.node.automatic['platform'] = 'ubuntu'

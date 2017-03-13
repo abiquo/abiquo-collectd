@@ -16,12 +16,16 @@ require 'spec_helper'
 
 describe 'collectd-abiquo::default' do
     let(:chef_run) do
-        ChefSpec::SoloRunner.new do |node|
+        ChefSpec::ServerRunner.new do |node, server|
             node.set['collectd_abiquo']['endpoint'] = 'http://localhost'
-            node.set['collectd_abiquo']['app_key'] = 'app-key'
-            node.set['collectd_abiquo']['app_secret'] = 'app-secret'
-            node.set['collectd_abiquo']['access_token'] = 'access-token'
-            node.set['collectd_abiquo']['access_token_secret'] = 'access-token-secret'
+            server.create_data_bag('abiquo_credentials', {
+              'collectd_oauth' => {
+                'app_key' => 'app-key',
+                'app_secret' => 'app-secret',
+                'access_token' => 'access-token',
+                'access_token_secret' => 'access-token-secret'
+              }
+            })
         end.converge(described_recipe)
     end
 

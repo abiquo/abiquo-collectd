@@ -18,5 +18,10 @@ require 'chefspec/berkshelf'
 ChefSpec::Coverage.start!
 
 RSpec.configure do |config|
+    config.platform = 'ubuntu'
+    config.version = '16.04'
+    # Avoid warnings caused by http://tickets.chef.io/browse/CHEF-3694
     config.log_level = :error
+    config.color = true
+    config.formatter = :documentation
 end

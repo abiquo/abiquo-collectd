@@ -5,6 +5,7 @@ driver:
 provisioner:
   name: chef_zero
   require_chef_omnibus: 12.5.1
+  data_bags_path: test/data_bags
 
 transport:
   compression: none
@@ -20,7 +21,3 @@ suites:
     attributes:
       collectd_abiquo:
         endpoint: http://localhost
-        app_key: api-key
-        app_secret: api-secret
-        access_token: access-token
-        access_token_secret: access-token-secret

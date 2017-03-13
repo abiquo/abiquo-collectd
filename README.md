@@ -36,12 +36,6 @@ Attribute | Description | Type | Mandatory | Default value
 ----------|-------------|------|-----------|--------------
 `['endpoint']` | The endpoint where the plugin will push the metrics | String | Yes | nil
 `['auth_type']` | The authentication method used to push metrics to the Abiquo API (basic | oauth) | String | No | 'oauth'
-`['username']` | The username used to authenticate to the Abiquo API | String | When using basic auth | nil
-`['password']` | The password used to authenticate to the Abiquo API | String | When using basic auth | nil
-`['app_key']` | The OAuth application key used to authenticate to the Abiquo API | String | When using OAuth | nil
-`['app_secret']` | The OAuth application secret used to authenticate to the Abiquo API | String | When using OAuth | nil
-`['access_token']` | The OAuth access token used to authenticate to the Abiquo API | String | When using OAuth | nil
-`['access_token_secret']` | The OAuth access token secret used to authenticate to the Abiquo API | String | When using OAuth | nil
 `['python_module_path']` | The path where python modules are installed | String | No | /usr/lib/collectd
 `['packages']` | The names of the collectd packages to install | List | No | \['collectd'\] (\['collectd-core', 'libpython2.7'\] in Ubuntu)
 `['plugins']` | The names of the default collectd plugins to install | List | No | \['cpu', 'disk', 'interface'\]
@@ -54,8 +48,20 @@ Attribute | Description | Type | Mandatory | Default value
 # Usage
 
 The cookbook is pretty straightforward to use. Just set all the mandatory attributes with the values for
-the notification endpoint and the OAuth credentials, and include the `recipe[collectd-abiquo]` in the
-run list.
+the notification endpoint and the authentication type, and include the `recipe[collectd-abiquo]` in the
+run list. You'll have to configure a data bag with the credentials in the Chef Server as explained below.
+
+# Configuring access to the Abiquo API
+
+In order to let the collectd plugin push metrics to the Abiquo API, the credentials must be stored in a
+data bag called `abiquo_credentials`, inside an item named `collectd_basic` (for basic auth credentials) or
+`collectd_oauth` (for OAuth credentials). The recipes will pick the right data bag item according to the value
+of the `node['collectd_abiquo']['auth_type']` attribute. Convenience items are included in this cookbook. You
+can upload them to the Chef Server as follows:
+
+    knife data bag create abiquo_credentials
+    knife data bag from file abiquo_credentials data_bags/abiquo_credentials/collectd_basic.json
+    knife data bag from file abiquo_credentials data_bags/abiquo_credentials/collectd_oauth.json
 
 # Testing
 

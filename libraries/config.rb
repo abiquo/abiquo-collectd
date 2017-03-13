@@ -26,18 +26,20 @@ module AbiquoCollectd
                 abiquo_writer_config['VerifySSL'] = node['collectd_abiquo']['verify_ssl']
             end
 
+            credentials = data_bag_item('abiquo_credentials', "collectd_#{node['collectd_abiquo']['auth_type']}")
+
             case node['collectd_abiquo']['auth_type']
             when 'oauth'
                 abiquo_writer_config.merge!({
-                    'ApplicationKey' => node['collectd_abiquo']['app_key'],
-                    'ApplicationSecret' => node['collectd_abiquo']['app_secret'],
-                    'AccessToken' => node['collectd_abiquo']['access_token'],
-                    'AccessTokenSecret' => node['collectd_abiquo']['access_token_secret']
+                    'ApplicationKey' => credentials['app_key'],
+                    'ApplicationSecret' => credentials['app_secret'],
+                    'AccessToken' => credentials['access_token'],
+                    'AccessTokenSecret' => credentials['access_token_secret']
                 })
             when 'basic'
                 abiquo_writer_config.merge!({
-                    'Username' => node['collectd_abiquo']['username'],
-                    'Password' => node['collectd_abiquo']['password']
+                    'Username' => credentials['username'],
+                    'Password' => credentials['password']
             })
             else
                 Chef::Application.fatal!('Attribute node["collectd_abiquo"]["auth_type"] must "oauth" or "basic"')
